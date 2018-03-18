@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Runkit embeded</title>
+    <style>
+        #my-element{
+            /* display:none; */
+        }
+    </style>
+</head>
+<body>
+
+    <div id="my-element">
+    </div>
+
+    <script src="https://embed.runkit.com"></script>
+    <script
+  src="https://code.jquery.com/jquery-3.3.1.min.js"
+  integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+  crossorigin="anonymous"></script>
+  <script>var notebook = RunKit.createNotebook({
+    // the parent element for the new notebook
+    element: document.getElementById("my-element"),
+    // specify the source of the notebook
+    source: "const faceapp = require('faceapp')\nconst superagent = require('superagent')\nlet { body } = await superagent.get('https://images-na.ssl-images-amazon.com/images/I/81VStYnDGrL.jpg')\nlet image = await faceapp.process(body, 'hot')",
+    onLoad: function(){
+        notebook.evaluate();
+    },
+    onEvaluate: function(){
+        console.log(notebook.iframe.contents().find("body").html());
+    }
+})
+    
+
+//     var innerDoc = notebook.iframe.contentDocument || notebook.iframe.contentWindow.document;
+// console.log(notebook.iframe.getElementsByClassName("run-button"));
+        
+
+</script>
+</body>
+</html>
